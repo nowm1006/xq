@@ -1,0 +1,11 @@
+[package]
+name = "xq"
+version = "0.1.0"
+authors = ["Naoto Maeda"]
+edition = "2021"
+description = "simple converter for xlsx. convets xlsx to csv"
+
+[dependencies]
+calamine = "0.26.1"
+clap = { version = "4.5.31", features = ["derive"] }
+csv = "1.3.1"
