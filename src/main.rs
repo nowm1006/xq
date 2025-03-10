@@ -38,13 +38,21 @@ struct Cli {
 
     /// sheet name to process
     sheet: String,
+
+    /// first number of rows to skip
+    #[arg(short, long)]
+    skip_rows: Option<u32>,
 }
 
 fn main() {
     let cli = Cli::parse();
 
     let mut wb: Xlsx<_> = open_workbook(&cli.file).expect("cannot read file");
-    let range = wb.worksheet_range(&cli.sheet).expect("cannot read sheet");
+    let mut range = wb.worksheet_range(&cli.sheet).expect("cannot read sheet");
+    let (_, min_col) = range.start().unwrap();
+    if let Some(n) = cli.skip_rows {
+        range = range.range((n, min_col), range.end().unwrap());
+    }
 
     let stdout = std::io::stdout().lock();
     let mut wtr = Writer::from_writer(stdout);

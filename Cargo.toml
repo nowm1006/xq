@@ -1,6 +1,6 @@
 [package]
 name = "xq"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Naoto Maeda"]
 edition = "2021"
 description = "simple converter for xlsx. convets xlsx to csv"
